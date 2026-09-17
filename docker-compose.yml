@@ -1,0 +1,168 @@
+name: online-boutique
+
+services:
+  # ------------------------------------------------------------
+  # All services are assigned UNIQUE container ports so the app
+  # behaves identically locally and on ECS Fargate, where every
+  # container shares a single network namespace (localhost).
+  #
+  # Run everything from inside this project/ folder. The full
+  # microservice source code is bundled here under ./src.
+  #
+  # Builds use the classic Docker builder (COMPOSE_BAKE=false in
+  # .env) so `docker compose up --build` works without buildx.
+  # ------------------------------------------------------------
+
+  redis-cart:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  adservice:
+    build:
+      context: ./src/adservice
+    ports:
+      - "9555:9555"
+    environment:
+      - PORT=9555
+
+  cartservice:
+    build:
+      context: ./src/cartservice/src
+    ports:
+      - "7070:7070"
+    environment:
+      - REDIS_ADDR=redis-cart:6379
+    depends_on:
+      - redis-cart
+
+  checkoutservice:
+    build:
+      context: ./src/checkoutservice
+    ports:
+      - "5050:5050"
+    environment:
+      - PORT=5050
+      - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
+      - SHIPPING_SERVICE_ADDR=shippingservice:50051
+      - PAYMENT_SERVICE_ADDR=paymentservice:50052
+      - EMAIL_SERVICE_ADDR=emailservice:8081
+      - CURRENCY_SERVICE_ADDR=currencyservice:7000
+      - CART_SERVICE_ADDR=cartservice:7070
+    depends_on:
+      - productcatalogservice
+      - shippingservice
+      - paymentservice
+      - emailservice
+      - currencyservice
+      - cartservice
+
+  currencyservice:
+    build:
+      context: ./src/currencyservice
+      args:
+        NPM_REGISTRY: ${NPM_REGISTRY:-https://registry.npmmirror.com}
+    ports:
+      - "7000:7000"
+    environment:
+      - PORT=7000
+      - DISABLE_PROFILER=1
+
+  emailservice:
+    build:
+      context: ./src/emailservice
+      args:
+        PIP_INDEX_URL: ${PIP_INDEX_URL:-https://pypi.org/simple}
+    ports:
+      - "8081:8081"
+    environment:
+      - PORT=8081
+      - DISABLE_PROFILER=1
+
+  frontend:
+    build:
+      context: ./src/frontend
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
+      - CURRENCY_SERVICE_ADDR=currencyservice:7000
+      - CART_SERVICE_ADDR=cartservice:7070
+      - RECOMMENDATION_SERVICE_ADDR=recommendationservice:8082
+      - SHIPPING_SERVICE_ADDR=shippingservice:50051
+      - CHECKOUT_SERVICE_ADDR=checkoutservice:5050
+      - AD_SERVICE_ADDR=adservice:9555
+      - SHOPPING_ASSISTANT_SERVICE_ADDR=shoppingassistantservice:8080
+    depends_on:
+      - productcatalogservice
+      - currencyservice
+      - cartservice
+      - recommendationservice
+      - shippingservice
+      - checkoutservice
+      - adservice
+
+  paymentservice:
+    build:
+      context: ./src/paymentservice
+      args:
+        NPM_REGISTRY: ${NPM_REGISTRY:-https://registry.npmmirror.com}
+    ports:
+      - "50052:50052"
+    environment:
+      - PORT=50052
+      - DISABLE_PROFILER=1
+
+  productcatalogservice:
+    build:
+      context: ./src/productcatalogservice
+    ports:
+      - "3550:3550"
+    environment:
+      - PORT=3550
+      - DISABLE_PROFILER=1
+
+  recommendationservice:
+    build:
+      context: ./src/recommendationservice
+      args:
+        PIP_INDEX_URL: ${PIP_INDEX_URL:-https://pypi.org/simple}
+    ports:
+      - "8082:8082"
+    environment:
+      - PORT=8082
+      - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
+      - DISABLE_PROFILER=1
+    depends_on:
+      - productcatalogservice
+
+  shippingservice:
+    build:
+      context: ./src/shippingservice
+    ports:
+      - "50051:50051"
+    environment:
+      - PORT=50051
+      - DISABLE_PROFILER=1
+
+  shoppingassistantservice:
+    profiles:
+      - ai
+    build:
+      context: ./src/shoppingassistantservice
+      args:
+        PIP_INDEX_URL: ${PIP_INDEX_URL:-https://pypi.org/simple}
+    environment:
+      - PROJECT_ID=${PROJECT_ID:-}
+      - REGION=${REGION:-}
+      - ALLOYDB_DATABASE_NAME=${ALLOYDB_DATABASE_NAME:-}
+      - ALLOYDB_TABLE_NAME=${ALLOYDB_TABLE_NAME:-}
+      - ALLOYDB_CLUSTER_NAME=${ALLOYDB_CLUSTER_NAME:-}
+      - ALLOYDB_INSTANCE_NAME=${ALLOYDB_INSTANCE_NAME:-}
+      - ALLOYDB_SECRET_NAME=${ALLOYDB_SECRET_NAME:-}
