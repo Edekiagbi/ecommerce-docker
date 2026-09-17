@@ -401,6 +401,12 @@ func (fe *frontendServer) placeOrderHandler(w http.ResponseWriter, r *http.Reque
 }
 
 func (fe *frontendServer) assistantHandler(w http.ResponseWriter, r *http.Request) {
+	log := r.Context().Value(ctxKeyLog{}).(logrus.FieldLogger)
+	if !assistantEnabled || fe.shoppingAssistantSvcAddr == "" {
+		renderHTTPError(log, r, w, errors.New("assistant is not enabled"), http.StatusNotFound)
+		return
+	}
+
 	currencies, err := fe.getCurrencies(r.Context())
 	if err != nil {
 		renderHTTPError(log, r, w, errors.Wrap(err, "could not retrieve currencies"), http.StatusInternalServerError)
@@ -450,6 +456,11 @@ func (fe *frontendServer) getProductByID(w http.ResponseWriter, r *http.Request)
 
 func (fe *frontendServer) chatBotHandler(w http.ResponseWriter, r *http.Request) {
 	log := r.Context().Value(ctxKeyLog{}).(logrus.FieldLogger)
+	if !assistantEnabled || fe.shoppingAssistantSvcAddr == "" {
+		renderHTTPError(log, r, w, errors.New("assistant is not enabled"), http.StatusNotFound)
+		return
+	}
+
 	type Response struct {
 		Message string `json:"message"`
 	}
