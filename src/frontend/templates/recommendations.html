@@ -16,20 +16,20 @@
 
 {{ define "recommendations" }}
 <section class="recommendations">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-10 offset-xl-1">
+    <div class="page-container">
+      <div class="row justify-content-center">
+        <div class="col-xl-10">
           <h2>You May Also Like</h2>
-          <div class="row">
+          <div class="row rec-grid">
             {{ range .recommendations }}
-            <div class="col-md-3">
-              <div>
+            <div class="col-md-3 rec-col">
+              <div class="rec-product">
                 <a href="{{ $.baseUrl }}/product/{{.Id}}">
-                  <img alt="" src="{{ $.baseUrl }}{{.Picture}}">
+                  <img class="rec-media" alt="" src="{{ $.baseUrl }}{{.Picture}}">
                 </a>
-                <div>
+                <div class="rec-meta">
                   <h5>
-                    {{ .Name }}
+                    <a href="{{ $.baseUrl }}/product/{{.Id}}">{{ .Name }}</a>
                   </h5>
                 </div>
               </div>

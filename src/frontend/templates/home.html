@@ -22,59 +22,415 @@
     {{$.platform_name}}
   </span>
 </div>
-<main role="main" class="home">
+<main role="main" class="home nest-home">
 
-  <!-- The image at the top of the home page, displayed on smaller screens. -->
-  <div class="home-mobile-hero-banner d-lg-none"></div>
+  <!-- ============================= HERO ============================= -->
+  <section class="hero" aria-label="Featured hero">
+    <div class="page-container">
+      <div class="hero-grid">
 
-  <div class="container-fluid">
-    <div class="row">
-
-      <!-- The image on the left of the home page, displayed on larger screens. -->
-      <!--<div class="col-4 d-none d-lg-block home-desktop-left-image"></div>-->
-      <!-- @TODO: removed temporarily. When uncommenting, also replace below div with this -->
-      <!--<div class="col-12 col-lg-8">-->
-
-      <div class="col-12 col-lg-12 px-10-percent">
-
-        <div class="row hot-products-row px-xl-6">
-
-          <div class="col-12">
-            <h3>Hot Products</h3>
-          </div>
-
-          {{ range $.products }}
-          <div class="col-md-4 hot-product-card">
-            <a href="{{ $.baseUrl }}/product/{{.Item.Id}}">
-              <img loading="lazy" src="{{ $.baseUrl }}{{.Item.Picture}}">
-              <div class="hot-product-card-img-overlay"></div>
+        <div class="hero-copy">
+          <h1 class="hero-title">
+            Sustainably<br />
+            <span class="cursive">Stylish. Naturally</span><br />
+            You
+          </h1>
+          <div class="hero-cta-row">
+            <a href="#favorites" class="btn-nest btn-nest-primary">
+              Explore Products
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
-            <div>
-              <div class="hot-product-card-name">{{ .Item.Name }}</div>
-              <div class="hot-product-card-price">{{ renderMoney .Price }}</div>
-            </div>
+            <p class="hero-note">Ethically made pieces that love you and the planet back.</p>
           </div>
-          {{ end }}
-
         </div>
 
-        <!-- Footer for larger screens. -->
-        <div class="row d-none d-lg-block home-desktop-footer-row">
-          <div class="col-12 p-0">
-            {{ template "footer" . }}
+        <div class="hero-aside">
+          <div class="hero-callout">
+            <div class="hero-callout-orb">
+              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=160&q=80&auto=format&fit=crop" alt="Portrait of a model wearing natural linen" />
+            </div>
+            <div class="hero-callout-copy">
+              <p><b>Made with intention.</b> Every Nest piece is crafted from low-impact, traceable materials.</p>
+            </div>
           </div>
         </div>
 
       </div>
 
+      <div class="featured-row">
+        <article class="featured-card pink">
+          <div class="featured-top">
+            <span class="featured-cat">Women / Outerwear</span>
+            <span class="featured-price">$129.00</span>
+          </div>
+          <h3 class="featured-title">Pink Fashion</h3>
+          <img class="featured-img" loading="lazy" src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=700&q=80&auto=format&fit=crop" alt="Model wearing a soft pink coat" />
+          <div class="featured-buy">
+            <a href="#favorites" class="btn-nest-icon" aria-label="Shop Pink Fashion">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="featured-card lime">
+          <div class="featured-top">
+            <span class="featured-cat">Women / Dresses</span>
+            <span class="featured-price">$89.00</span>
+          </div>
+          <h3 class="featured-title">Autumn Frock</h3>
+          <img class="featured-img" loading="lazy" src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=700&q=80&auto=format&fit=crop" alt="Model in a flowing autumn dress" />
+          <div class="featured-buy">
+            <a href="#favorites" class="btn-nest-icon" aria-label="Shop Autumn Frock">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="featured-card lavender">
+          <div class="featured-top">
+            <span class="featured-cat">Footwear</span>
+            <span class="featured-price">$159.00</span>
+          </div>
+          <h3 class="featured-title">Purple Sneakers</h3>
+          <img class="featured-img" loading="lazy" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=80&auto=format&fit=crop" alt="Statement purple sneakers" />
+          <div class="featured-buy">
+            <a href="#favorites" class="btn-nest-icon" aria-label="Shop Purple Sneakers">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= BRAND STRIP ============================= -->
+  <div class="logo-strip" aria-label="Partner brands">
+    <div class="page-container logo-strip-inner">
+      <span class="brand-logo"><span class="dot"></span>AVENUE</span>
+      <span class="brand-logo serif">Atelier &amp; Co</span>
+      <span class="brand-logo lite">KINETIC</span>
+      <span class="brand-logo geometric">PURE LOOM</span>
+      <span class="brand-logo"><span class="dot"></span>MONO</span>
     </div>
   </div>
 
+  <!-- ============================= TOP PRODUCT MOSAIC ============================= -->
+  <section class="mosaic" id="top-product" aria-label="Top product of the month">
+    <div class="page-container">
+      <div class="mosaic-grid">
+
+        <div class="ed-card ed-tall">
+          <span class="ed-tag">Editor's Pick</span>
+          <img class="ed-media" loading="lazy" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700&q=80&auto=format&fit=crop" alt="Woman carrying a structured tote while shopping" />
+          <span class="ed-price-pill">$210.00</span>
+        </div>
+
+        <div class="mosaic-col">
+          <div class="ed-card">
+            <span class="ed-colors"><span style="background:#5b7cfa"></span><span style="background:#111"></span></span>
+            <img class="ed-media" loading="lazy" src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=700&q=80&auto=format&fit=crop" alt="Structured blue handbag" />
+            <span class="ed-price-pill">$185.00</span>
+          </div>
+          <div class="ed-card">
+            <img class="ed-media" loading="lazy" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700&q=80&auto=format&fit=crop" alt="Editorial fashion portrait" />
+          </div>
+        </div>
+
+        <div class="ed-text-block">
+          <span class="eyebrow">October drop</span>
+          <h2 class="section-title">Top Product<br /><b>Of The Month</b></h2>
+          <p class="section-sub">The structured tote every editor reached for this season. Crafted from recycled Italian leather in a palette that goes with everything—and lasts longer than the trends.</p>
+          <p class="section-sub" style="margin-bottom:24px;">Free shipping over $75. Low-carbon delivery on every order.</p>
+          <a href="#favorites" class="btn-nest btn-nest-outline">
+            Shop the drop
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <div class="ed-card ed-feature" style="margin-top:40px;">
+            <span class="ed-tag">New</span>
+            <img class="ed-media" loading="lazy" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=700&q=80&auto=format&fit=crop" alt="Model wearing a colorful knit look" />
+            <span class="ed-price-pill">$74.00</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= CONSCIOUS LOOKS ============================= -->
+  <section class="conscious" id="conscious" aria-label="Conscious looks, daily confidence">
+    <div class="page-container">
+      <div class="conscious-grid">
+
+        <div class="conscious-copy">
+          <span class="eyebrow">Our philosophy</span>
+          <h2 class="section-title">Conscious Looks,<br /><b>Daily Confidence</b></h2>
+
+          <div class="look-row">
+            <div class="look-body">
+              <p class="look-name">Styling Basics</p>
+              <p class="look-desc">Effortless capsule outfits from a few quality, versatile pieces.</p>
+            </div>
+            <a href="#favorites" class="look-arrow" aria-label="Explore styling basics">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <div class="look-row">
+            <div class="look-body">
+              <p class="look-name">Fashion Business</p>
+              <p class="look-desc">Boardroom-ready tailoring made from certified organic fabrics.</p>
+            </div>
+            <a href="#favorites" class="look-arrow" aria-label="Explore fashion business looks">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <div class="look-row">
+            <div class="look-body">
+              <p class="look-name">Sustainable Fashion</p>
+              <p class="look-desc">Circular designs, traceable supply chains, planet-positive materials.</p>
+            </div>
+            <a href="#favorites" class="look-arrow" aria-label="Explore sustainable fashion">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="conscious-media">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=900&q=80&auto=format&fit=crop" alt="Confident woman in a tailored sustainable outfit" />
+          <div class="conscious-quote">
+            <p>"When your clothes respect the planet, they respect you back."</p>
+            <span>— The Nest Studio</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= SERVICE BENEFITS ============================= -->
+  <section class="benefits" id="services" aria-label="Our services">
+    <div class="page-container">
+      <div class="benefits-panel">
+
+        <div class="benefit">
+          <span class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+          </span>
+          <h3 class="benefit-title">Payment Method</h3>
+          <p class="benefit-desc">Flexible checkout with cards, digital wallets and buy-now-pay-later.</p>
+        </div>
+
+        <div class="benefit">
+          <span class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+          </span>
+          <h3 class="benefit-title">Return Policy</h3>
+          <p class="benefit-desc">30-day hassle-free returns. Free exchanges on first wear.</p>
+        </div>
+
+        <div class="benefit">
+          <span class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Z"/><path d="M21 14h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-5Z"/><path d="M3 14v-2a9 9 0 0 1 18 0v2"/></svg>
+          </span>
+          <h3 class="benefit-title">Customer Support</h3>
+          <p class="benefit-desc">Real humans, 7 days a week, ready to style you through.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= FAVORITE PICKS ============================= -->
+  <section class="picks" id="favorites" aria-label="Favorite picks">
+    <div class="page-container">
+      <header class="section-head center">
+        <span class="eyebrow">Curated for you</span>
+        <h2 class="section-title">Favorite Picks</h2>
+        <p class="section-sub">The pieces our community keeps coming back to—timeless, comfortable and responsibly made.</p>
+      </header>
+
+      <div class="tabs" role="tablist" aria-label="Filter products by category">
+        <button class="tab active" type="button" role="tab" aria-selected="true" data-filter="all">All Products</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-filter="clothing">Hoodie</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-filter="accessories">Bags</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-filter="footwear">Men</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-filter="tops">Women</button>
+      </div>
+
+      <div class="picks-grid" id="picksGrid">
+        {{ range $i, $p := $.products }}
+        <article class="product-card" data-category="
+          {{- range $c := $p.Item.Categories -}}
+            {{- $c -}}
+          {{- end -}}
+        ">
+          <div class="product-card-media">
+            {{ if eq $i 0 }}
+            <span class="product-card-badge navy">New</span>
+            {{ else if eq $i 3 }}
+            <span class="product-card-badge lime">Hot</span>
+            {{ else if eq $i 5 }}
+            <span class="product-card-badge neutral">Staff pick</span>
+            {{ end }}
+            {{ if or (eq $i 1) (eq $i 4) }}
+            <span class="product-card-status">In stock</span>
+            {{ end }}
+            <a href="{{ $.baseUrl }}/product/{{ $p.Item.Id }}" aria-label="View {{ $p.Item.Name }}">
+              <img loading="lazy" src="{{ $.baseUrl }}{{ $p.Item.Picture }}" alt="{{ $p.Item.Name }}" />
+            </a>
+          </div>
+          <div class="product-card-rating" data-rating="
+            {{- if eq $i 0 -}}4.9{{- else if eq $i 1 -}}4.8{{- else if eq $i 2 -}}4.9{{- else if eq $i 3 -}}4.7{{- else if eq $i 4 -}}5.0{{- else if eq $i 5 -}}4.6{{- else if eq $i 6 -}}4.8{{- else -}}4.7{{- end -}}
+          " data-reviews="
+            {{- if eq $i 0 -}}128{{- else if eq $i 1 -}}96{{- else if eq $i 2 -}}214{{- else if eq $i 3 -}}73{{- else if eq $i 4 -}}301{{- else if eq $i 5 -}}58{{- else if eq $i 6 -}}142{{- else -}}87{{- end -}}
+          ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="rstar"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="rstar"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="rstar"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="rstar"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="rstar"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+          </div>
+          <h3 class="product-card-name">{{ $p.Item.Name }}</h3>
+          <p class="product-card-price">
+            {{ renderMoney $p.Price }}
+          </p>
+          <div class="product-card-actions">
+            <form method="POST" action="{{ $.baseUrl }}/cart">
+              <input type="hidden" name="product_id" value="{{ $p.Item.Id }}" />
+              <input type="hidden" name="quantity" value="1" />
+              <button class="add-to-cart" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                Add To Cart
+              </button>
+            </form>
+          </div>
+        </article>
+        {{ end }}
+      </div>
+
+      <p class="filter-empty" id="filterEmpty">No pieces match that filter yet—check back soon.</p>
+    </div>
+  </section>
+
+  <!-- ============================= TESTIMONIALS ============================= -->
+  <section class="testimonials" id="testimonials" aria-label="Customer testimonials">
+    <div class="page-container">
+      <header class="section-head center">
+        <span class="eyebrow">1000+ happy customers</span>
+        <h2 class="section-title">Loved by the community</h2>
+        <p class="section-sub">Real stories from people who switched to a more conscious closet.</p>
+      </header>
+    </div>
+
+    <div class="testi-scroller">
+      <div class="testi-track" id="testiTrack">
+
+        <article class="testi-card">
+          <div class="testi-stars" aria-label="5 star rating">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+          </div>
+          <p class="testi-text">"The linen blazer feels custom-made. I've replaced four fast-fashion jackets with this one piece."</p>
+          <div class="testi-person">
+            <img class="testi-avatar" loading="lazy" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=80&auto=format&fit=crop" alt="Portrait of Mia Ramos" />
+            <div>
+              <p class="testi-name">Mia Ramos</p>
+              <p class="testi-role">Creative Director, LA</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-stars" aria-label="5 star rating">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+          </div>
+          <p class="testi-text">"Customer support helped me restyle three outfits over one call. Genuinely the best service I've had."</p>
+          <div class="testi-person">
+            <img class="testi-avatar" loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80&auto=format&fit=crop" alt="Portrait of Daniel Kim" />
+            <div>
+              <p class="testi-name">Daniel Kim</p>
+              <p class="testi-role">Product Designer, NYC</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-stars" aria-label="5 star rating">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+          </div>
+          <p class="testi-text">"The knitwear is unreal. You can tell every thread was chosen with the planet in mind."</p>
+          <div class="testi-person">
+            <img class="testi-avatar" loading="lazy" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80&auto=format&fit=crop" alt="Portrait of Sofia Andersson" />
+            <div>
+              <p class="testi-name">Sofia Andersson</p>
+              <p class="testi-role">Sustainability Lead, Berlin</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-stars" aria-label="5 star rating">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+          </div>
+          <p class="testi-text">"Ordered the tote on Monday, wearing it to a shoot by Friday. Fast, beautiful, low-impact."</p>
+          <div class="testi-person">
+            <img class="testi-avatar" loading="lazy" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80&auto=format&fit=crop" alt="Portrait of James Carter" />
+            <div>
+              <p class="testi-name">James Carter</p>
+              <p class="testi-role">Photographer, London</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-stars" aria-label="5 star rating">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.2 5.9 20.4l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>
+          </div>
+          <p class="testi-text">"Finally a brand where 'sustainable' isn't a marketing sticker. The quality speaks for itself."</p>
+          <div class="testi-person">
+            <img class="testi-avatar" loading="lazy" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80&auto=format&fit=crop" alt="Portrait of Aisha Noor" />
+            <div>
+              <p class="testi-name">Aisha Noor</p>
+              <p class="testi-role">Stylist, Dubai</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="testi-nav">
+      <button class="testi-arrow" id="testiPrev" type="button" aria-label="Previous testimonials">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+      </button>
+      <div class="testi-dots" id="testiDots" role="tablist" aria-label="Testimonial page indicator"></div>
+      <button class="testi-arrow" id="testiNext" type="button" aria-label="Next testimonials">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
 </main>
 
-<!-- Footer for smaller screens. -->
-<div class="d-lg-none">
-  {{ template "footer" . }}
-</div>
-
+{{ template "footer" . }}
 {{ end }}

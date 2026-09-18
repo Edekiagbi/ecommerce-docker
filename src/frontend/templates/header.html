@@ -26,19 +26,19 @@
         {{ if $.is_cymbal_brand }}
         Cymbal Shops
         {{ else }}
-        Online Boutique
+        Nest
         {{ end }}
     </title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Google+Symbols:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ $.baseUrl }}/static/styles/styles.css">
     <link rel="stylesheet" type="text/css" href="{{ $.baseUrl }}/static/styles/cart.css">
     <link rel="stylesheet" type="text/css" href="{{ $.baseUrl }}/static/styles/order.css">
     <link rel="stylesheet" type="text/css" href="{{ $.baseUrl }}/static/styles/bot.css">
+    <link rel="stylesheet" type="text/css" href="{{ $.baseUrl }}/static/styles/landing.css">
     {{ if $.is_cymbal_brand }}
     <link rel='shortcut icon' type='image/x-icon' href='{{ $.baseUrl }}/static/favicon-cymbal.ico' />
     {{ else }}
@@ -46,56 +46,66 @@
     {{ end }}
 </head>
 
-<body>
-    <header>
+<body class="nest">
+    <header class="nest-header">
         {{ if $.frontendMessage }}
-        <div class="navbar">
-            <div class="container d-flex justify-content-center">
-                <div class="h-free-shipping">{{ $.frontendMessage }}</div>
-            </div>
-        </div>
+        <div class="nest-banner">{{ $.frontendMessage }}</div>
         {{ end }}
-        <div class="navbar sub-navbar">
-            <div class="container d-flex justify-content-between">
-                <a href="{{ $.baseUrl }}/" class="navbar-brand d-flex align-items-center">
-                    {{ if $.is_cymbal_brand }}
-                    <img src="{{ $.baseUrl }}/static/icons/Cymbal_NavLogo.svg" alt="" class="top-left-logo-cymbal" />
-                    {{ else }}
-                    <img src="{{ $.baseUrl }}/static/icons/Hipster_NavLogo.svg" alt="" class="top-left-logo" />
-                    {{ end }}
+        <div class="page-container">
+            <nav class="nest-nav" aria-label="Primary">
+                <a href="{{ $.baseUrl }}/" class="nest-brand">
+                    <span class="nest-brand-mark" aria-hidden="true">N</span>
+                    Nest
                 </a>
-                <div class="controls">
+
+                <ul class="nest-nav-links" id="nestNavLinks">
+                    <li><a href="{{ $.baseUrl }}/" class="active">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#top-product">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#conscious">About Us</a></li>
+                </ul>
+
+                <div class="nest-nav-actions">
+                    <form class="nest-search-form" id="nestSearchForm" action="{{ $.baseUrl }}/" method="get" role="search">
+                        <input class="nest-search-input" type="search" name="q" placeholder="Search products…" aria-label="Search products" />
+                    </form>
+                    <button class="nest-icon-btn" id="nestSearchToggle" type="button" aria-label="Toggle search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    </button>
 
                     {{ if $.show_currency }}
-                    <div class="h-controls">
-                        <div class="h-control">
-                            <span class="icon currency-icon"> {{ renderCurrencyLogo $.user_currency}}</span>
-                            <form method="POST" class="controls-form" action="{{ $.baseUrl }}/setCurrency" id="currency_form" >
-                                <select name="currency_code" onchange="document.getElementById('currency_form').submit();">
-                                        {{range $.currencies}}
-                                    <option value="{{.}}" {{if eq . $.user_currency}}selected="selected"{{end}}>{{.}}</option>
-                                    {{end}}
-                                </select>
-                            </form>
-                            <img src="{{ $.baseUrl }}/static/icons/Hipster_DownArrow.svg" alt="" class="icon arrow" />
-                        </div>
-                    </div>
+                    <form method="POST" class="nest-currency-form" action="{{ $.baseUrl }}/setCurrency" id="currency_form">
+                        <select name="currency_code" class="nest-currency" aria-label="Select currency" onchange="document.getElementById('currency_form').submit();">
+                            {{range $.currencies}}
+                            <option value="{{.}}" {{if eq . $.user_currency}}selected="selected"{{end}}>{{.}}</option>
+                            {{end}}
+                        </select>
+                    </form>
                     {{ end }}
 
                     {{ if $.assistant_enabled }}
-                    <a href="{{ $.baseUrl }}/assistant" class="cart-link">
-                      <img src="{{ $.baseUrl }}/static/icons/Hipster_WandIcon.svg" style="width: 22px; height: 22px;" alt="Assistant icon" class="logo" title="Assistant" />
+                    <a href="{{ $.baseUrl }}/assistant" class="nest-icon-btn nest-assistant" aria-label="Open shopping assistant" title="Assistant">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 4.8L18 9l-4.1 1.2L12 15l-1.9-4.8L6 9l4.1-1.2L12 3Z"/><path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14Z"/></svg>
                     </a>
                     {{ end }}
 
-                    <a href="{{ $.baseUrl }}/cart" class="cart-link">
-                        <img src="{{ $.baseUrl }}/static/icons/Hipster_CartIcon.svg" alt="Cart icon" class="logo" title="Cart" />
+                    <a href="{{ $.baseUrl }}/" class="nest-icon-btn" aria-label="Sign in to your account" title="Sign in">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                    </a>
+
+                    <a href="{{ $.baseUrl }}/cart" class="nest-icon-btn nest-cart-wrap" aria-label="View shopping cart">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7V6a6 6 0 0 1 12 0v1"/><path d="M5 7h14a1 1 0 0 1 1 1.2l-1.5 10A2 2 0 0 1 16.5 20h-9a2 2 0 0 1-2-1.8L4 8.2A1 1 0 0 1 5 7Z"/></svg>
                         {{ if $.cart_size }}
-                        <span class="cart-size-circle">{{$.cart_size}}</span>
+                        <span class="nest-cart-count" aria-hidden="true">{{$.cart_size}}</span>
                         {{ end }}
                     </a>
+
+                    <button class="nest-icon-btn nest-burger" id="nestBurger" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nestNavLinks">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="7" y2="7"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="17" y2="17"/></svg>
+                    </button>
                 </div>
-            </div>
+            </nav>
         </div>
 
     </header>

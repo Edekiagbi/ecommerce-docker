@@ -107,6 +107,198 @@
                 "nanos": 990000000
             },
             "categories": ["kitchen"]
+        },
+        {
+            "id": "NESTKNIT01",
+            "name": "Knitted Sweater",
+            "description": "A chunky knit pullover in soft natural fiber. Warm, breathable and endlessly cozy.",
+            "picture": "/static/img/products/knitted-sweater.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 96,
+                "nanos": 0
+            },
+            "categories": ["clothing"]
+        },
+        {
+            "id": "NESTBLAZ01",
+            "name": "Tailored Blazer",
+            "description": "A relaxed single-breasted blazer cut from traceable wool blend. Smart enough for work, soft enough for the weekend.",
+            "picture": "/static/img/products/tailored-blazer.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 148,
+                "nanos": 0
+            },
+            "categories": ["clothing"]
+        },
+        {
+            "id": "NESTDENIM1",
+            "name": "Denim Jacket",
+            "description": "A timeless denim trucker jacket in organic cotton. Ages beautifully, made to last.",
+            "picture": "/static/img/products/denim-jacket.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 119,
+                "nanos": 0
+            },
+            "categories": ["clothing"]
+        },
+        {
+            "id": "NESTSILK01",
+            "name": "Silk Blouse",
+            "description": "A liquid-silk blouse with a fluid drape and hidden placket. Pair with tailoring or jeans.",
+            "picture": "/static/img/products/silk-blouse.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 132,
+                "nanos": 0
+            },
+            "categories": ["tops", "clothing"]
+        },
+        {
+            "id": "NESTLINN01",
+            "name": "Linen Shirt",
+            "description": "Breezy European linen shirt with a relaxed collar. Gets softer with every wash.",
+            "picture": "/static/img/products/linen-shirt.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 84,
+                "nanos": 0
+            },
+            "categories": ["tops", "clothing"]
+        },
+        {
+            "id": "NESTCARD01",
+            "name": "Cropped Cardigan",
+            "description": "A boxy cropped cardigan in merino-mix knit. Layers beautifully over blouses and tees.",
+            "picture": "/static/img/products/cropped-cardigan.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 74,
+                "nanos": 0
+            },
+            "categories": ["tops"]
+        },
+        {
+            "id": "NESTRIBB01",
+            "name": "Ribbed Knit Top",
+            "description": "A fitted ribbed knit top with a high neckline. Stretches, breathes and holds its shape.",
+            "picture": "/static/img/products/ribbed-knit-top.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 58,
+                "nanos": 0
+            },
+            "categories": ["tops"]
+        },
+        {
+            "id": "NESTDRES01",
+            "name": "Cocktail Dress",
+            "description": "A bias-cut cocktail dress in silky fabrication. Effortless movement, evening-ready.",
+            "picture": "/static/img/products/cocktail-dress.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 169,
+                "nanos": 0
+            },
+            "categories": ["tops", "dresses"]
+        },
+        {
+            "id": "NESTTOTE01",
+            "name": "Leather Tote",
+            "description": "A structured full-grain leather tote with an interior sleeve. Carries the day with ease.",
+            "picture": "/static/img/products/leather-tote.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 198,
+                "nanos": 0
+            },
+            "categories": ["accessories"]
+        },
+        {
+            "id": "NESTCROSS1",
+            "name": "Crossbody Bag",
+            "description": "A compact crossbody bag with an adjustable strap. Everyday minimalism.",
+            "picture": "/static/img/products/crossbody-bag.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 92,
+                "nanos": 0
+            },
+            "categories": ["accessories"]
+        },
+        {
+            "id": "NESTVINT01",
+            "name": "Vintage Sunglasses",
+            "description": "Sun-baked acetate frames with gradient lenses. Retro vibes, modern UV protection.",
+            "picture": "/static/img/products/vintage-sunglasses.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 68,
+                "nanos": 0
+            },
+            "categories": ["accessories"]
+        },
+        {
+            "id": "NESTGOLD01",
+            "name": "Gold Watch",
+            "description": "A slim gold-tone watch with a classic link bracelet. Polished for any occasion.",
+            "picture": "/static/img/products/gold-watch.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 225,
+                "nanos": 0
+            },
+            "categories": ["accessories"]
+        },
+        {
+            "id": "NESTSNEAK1",
+            "name": "White Sneakers",
+            "description": "Minimal white leather sneakers with a cushioned sole. The wardrobe workhorse.",
+            "picture": "/static/img/products/white-sneakers.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 118,
+                "nanos": 0
+            },
+            "categories": ["footwear"]
+        },
+        {
+            "id": "NESTBOOT01",
+            "name": "Leather Boots",
+            "description": "Tough ankle boots in vegetable-tanned leather with a stacked heel. Built for all seasons.",
+            "picture": "/static/img/products/leather-boots.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 179,
+                "nanos": 0
+            },
+            "categories": ["footwear"]
+        },
+        {
+            "id": "NESTESPAD1",
+            "name": "Espadrilles",
+            "description": "Classic woven espadrilles with a jute sole. Light for summer days.",
+            "picture": "/static/img/products/espadrilles.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 66,
+                "nanos": 0
+            },
+            "categories": ["footwear"]
+        },
+        {
+            "id": "NESTDRES2",
+            "name": "Dress Shoes",
+            "description": "Clean cap-toe leather oxfords with a subtle shine. Quietly confident.",
+            "picture": "/static/img/products/dress-shoes.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 156,
+                "nanos": 0
+            },
+            "categories": ["footwear"]
         }
     ]
 }

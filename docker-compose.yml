@@ -1,5 +1,10 @@
 name: online-boutique
 
+x-common: &common-dns
+  dns:
+    - ${DOCKER_DNS_1:-8.8.8.8}
+    - ${DOCKER_DNS_2:-1.1.1.1}
+
 services:
   # ------------------------------------------------------------
   # All services are assigned UNIQUE container ports so the app
@@ -14,6 +19,7 @@ services:
   # ------------------------------------------------------------
 
   redis-cart:
+    <<: *common-dns
     image: redis:alpine
     ports:
       - "6379:6379"
@@ -24,6 +30,7 @@ services:
       retries: 5
 
   adservice:
+    <<: *common-dns
     build:
       context: ./src/adservice
     ports:
@@ -32,6 +39,7 @@ services:
       - PORT=9555
 
   cartservice:
+    <<: *common-dns
     build:
       context: ./src/cartservice/src
     ports:
@@ -39,9 +47,11 @@ services:
     environment:
       - REDIS_ADDR=redis-cart:6379
     depends_on:
-      - redis-cart
+      redis-cart:
+        condition: service_healthy
 
   checkoutservice:
+    <<: *common-dns
     build:
       context: ./src/checkoutservice
     ports:
@@ -63,6 +73,7 @@ services:
       - cartservice
 
   currencyservice:
+    <<: *common-dns
     build:
       context: ./src/currencyservice
       args:
@@ -74,6 +85,7 @@ services:
       - DISABLE_PROFILER=1
 
   emailservice:
+    <<: *common-dns
     build:
       context: ./src/emailservice
       args:
@@ -85,10 +97,11 @@ services:
       - DISABLE_PROFILER=1
 
   frontend:
+    <<: *common-dns
     build:
       context: ./src/frontend
     ports:
-      - "8080:8080"
+      - "9080:8080"
     environment:
       - PORT=8080
       - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
@@ -99,7 +112,7 @@ services:
       - CHECKOUT_SERVICE_ADDR=checkoutservice:5050
       - AD_SERVICE_ADDR=adservice:9555
       - ENABLE_ASSISTANT=${ENABLE_ASSISTANT:-false}
-      - SHOPPING_ASSISTANT_SERVICE_ADDR=${SHOPPING_ASSISTANT_SERVICE_ADDR:-}
+      - SHOPPING_ASSISTANT_SERVICE_ADDR=${SHOPPING_ASSISTANT_SERVICE_ADDR:-shoppingassistantservice:8080}
     depends_on:
       - productcatalogservice
       - currencyservice
@@ -109,7 +122,21 @@ services:
       - checkoutservice
       - adservice
 
+  loadgenerator:
+    <<: *common-dns
+    build:
+      context: ./src/loadgenerator
+      args:
+        PIP_INDEX_URL: ${PIP_INDEX_URL:-https://pypi.org/simple}
+    environment:
+      - FRONTEND_ADDR=frontend:8080
+      - USERS=${LOADGEN_USERS:-5}
+      - RATE=${LOADGEN_RATE:-1}
+    depends_on:
+      - frontend
+
   paymentservice:
+    <<: *common-dns
     build:
       context: ./src/paymentservice
       args:
@@ -121,6 +148,7 @@ services:
       - DISABLE_PROFILER=1
 
   productcatalogservice:
+    <<: *common-dns
     build:
       context: ./src/productcatalogservice
     ports:
@@ -130,6 +158,7 @@ services:
       - DISABLE_PROFILER=1
 
   recommendationservice:
+    <<: *common-dns
     build:
       context: ./src/recommendationservice
       args:
@@ -144,6 +173,7 @@ services:
       - productcatalogservice
 
   shippingservice:
+    <<: *common-dns
     build:
       context: ./src/shippingservice
     ports:
@@ -153,6 +183,7 @@ services:
       - DISABLE_PROFILER=1
 
   shoppingassistantservice:
+    <<: *common-dns
     profiles:
       - ai
     build:
